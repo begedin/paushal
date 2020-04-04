@@ -7,6 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = (env, options) => ({
+  devtool: 'source-map',
   optimization: {
     minimizer: [
       new TerserPlugin({ cache: true, parallel: true, sourceMap: false }),
@@ -24,7 +25,6 @@ module.exports = (env, options) => ({
     rules: [
       {
         test: /\.vue$/,
-        exclude: /node_modules/,
         loader: 'vue-loader',
       },
       // this will apply to both plain `.scss` files
@@ -34,7 +34,7 @@ module.exports = (env, options) => ({
         use: ['vue-style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.tsx?$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
         use: [
           {
@@ -42,6 +42,9 @@ module.exports = (env, options) => ({
           },
           {
             loader: 'ts-loader',
+            options: {
+              appendTsSuffixTo: [/.vue$/],
+            },
           },
         ],
       },
@@ -52,11 +55,13 @@ module.exports = (env, options) => ({
     ],
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.vue'],
+    extensions: ['.ts', '.js', '.vue'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: '../css/app.css' }),
-    new CopyWebpackPlugin([{ from: 'static/', to: '../' }]),
     new VueLoaderPlugin(),
+    new CopyWebpackPlugin([{ from: 'static/', to: '../' }]),
   ],
 });

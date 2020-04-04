@@ -1,19 +1,18 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "jsx": "preserve",
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "module": "ESNext",
     "moduleResolution": "node",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "../priv/static/",
-    "sourceMap": true,
     "strict": true,
     "target": "ESNext"
   },

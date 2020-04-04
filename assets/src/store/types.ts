@@ -1,4 +1,4 @@
-export type PaymentSlip = {
+export type PaymentSlipPayload = {
   id: number;
   amount: number;
   date_of_execution: string | null;
