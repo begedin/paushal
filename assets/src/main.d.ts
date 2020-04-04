@@ -1,5 +1,6 @@
 import Vue, { VNode } from 'vue';
-import { CreateElement } from 'vue/types/umd';
+import { Store } from 'vuex';
+import { RootState } from './store';
 
 declare global {
   namespace JSX {
