@@ -1,24 +1,39 @@
 <template>
   <div class="app">
-    <payment-slip v-for="slip in slips" :key="slip.id" :slip="slip" />
+    <div class="nav">
+      <router-link to="/">Home</router-link>
+      <router-link to="/codepoc">POC - Code</router-link>
+    </div>
+    <router-view />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { State } from 'vuex-class';
-import { PaymentSlipPayload } from './store/types';
-import PaymentSlip from './components/PaymentSlip.vue';
 
-@Component({ name: 'app', components: { PaymentSlip } })
-export default class App extends Vue {
-  @State(state => state.paymentSlips.paymentSlips) 
-  slips!: PaymentSlipPayload[]
-}
+@Component({ name: 'app' })
+export default class App extends Vue {}
 </script>
 
 <style lang="scss" scoped>
 .app {
-  color: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+
+  a {
+    background: palegreen;
+    border-radius: 2px;
+    margin: 3px;
+    padding: 5px;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
 }
 </style>

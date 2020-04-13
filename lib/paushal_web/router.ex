@@ -22,7 +22,6 @@ defmodule PaushalWeb.Router do
 
   scope "/", PaushalWeb do
     pipe_through :browser
-
-    get "/", PageController, :index
+    get "/*anything", PageController, :index
   end
 end
