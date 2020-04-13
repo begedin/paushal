@@ -8,7 +8,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { State } from 'vuex-class';
 import { PaymentSlipPayload } from './store/types';
-import PaymentSlip from './components/PaymentSlip';
+import PaymentSlip from './components/PaymentSlip.vue';
 
 @Component({ name: 'app', components: { PaymentSlip } })
 export default class App extends Vue {
