@@ -1,4 +1,5 @@
-///<reference path="main.d.ts" />
+/// <reference path="main.d.ts" />
+/* globals process */
 
 import Vue from 'vue';
 import Vuex from 'vuex';
@@ -8,10 +9,18 @@ import App from './App.vue';
 import { RootState, createStore } from './store';
 import { router } from './router';
 import { ComponentOptions } from 'vue/types/umd';
+import GAuth from 'vue-google-oauth2';
 
-Vue.use<RootState>(Vuex);
+const gauthOption = {
+  clientId: process.env.GOOGLE_CLIENT_ID,
+  scope: 'profile email',
+  prompt: 'select_account',
+};
+Vue.use(GAuth, gauthOption);
+
 Vue.use(Router);
 
+Vue.use<RootState>(Vuex);
 const store = createStore();
 
 const options: ComponentOptions<Vue> = {

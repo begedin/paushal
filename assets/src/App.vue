@@ -1,8 +1,12 @@
 <template>
   <div class="app">
     <div class="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/codepoc">POC - Code</router-link>
+      <router-link to="/">
+        Home
+      </router-link>
+      <router-link to="/codepoc">
+        POC - Code
+      </router-link>
     </div>
     <router-view />
   </div>
@@ -10,7 +14,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { State } from 'vuex-class';
 
 @Component({ name: 'app' })
 export default class App extends Vue {}
