@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const glob = require('glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -63,5 +64,6 @@ module.exports = (env, options) => ({
   plugins: [
     new VueLoaderPlugin(),
     new CopyWebpackPlugin([{ from: 'static/', to: '../' }]),
+    new webpack.EnvironmentPlugin(['GOOGLE_CLIENT_ID']),
   ],
 });

@@ -14,7 +14,8 @@
     "noUnusedParameters": true,
     "outDir": "../priv/static/",
     "strict": true,
-    "target": "ESNext"
+    "target": "ESNext",
+    "types": ["webpack-env"]
   },
   "include": [
     "src/**/*.vue",
@@ -25,5 +26,8 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
-  "exclude": ["node_modules/**/*"]
+  "exclude": ["node_modules/**/*"],
+  "paths": {
+    "@": ["src"]
+  }
 }
