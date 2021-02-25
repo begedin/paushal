@@ -1,5 +1,5 @@
 <template>
-  <div v-if="signedIn">
+  <div v-if="!!credentials">
     <img :src="credentials.image" referrerpolicy="no-referrer" />
     <div>{{ credentials.name }}</div>
     <div>{{ credentials.email }}</div>
@@ -27,10 +27,6 @@ export default class GoogleAuth extends Vue {
     image: string;
     name: string;
   } | null = null;
-
-  get signedIn(): boolean {
-    return !!this.credentials;
-  }
 
   created() {
     const credentialsStr = localStorage.getItem('credentials-google');

@@ -7,7 +7,12 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ],
     "module": "ESNext",
     "moduleResolution": "node",
     "noUnusedLocals": true,
@@ -15,7 +20,9 @@
     "outDir": "../priv/static/",
     "strict": true,
     "target": "ESNext",
-    "types": ["webpack-env"]
+    "types": [
+      "webpack-env"
+    ]
   },
   "include": [
     "src/**/*.vue",
@@ -26,8 +33,13 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
-  "exclude": ["node_modules/**/*"],
+  "exclude": [
+    "node_modules/**/*"
+  ],
+  "baseUrl": ".",
   "paths": {
-    "@": ["src"]
+    "@/*": [
+      "src/*"
+    ]
   }
 }
