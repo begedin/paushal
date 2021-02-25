@@ -6,8 +6,9 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import { generate2DBarcode } from '../generator';
-import { PaymentSlipPayload } from '../store/types';
+
+import { generate2DBarcode } from '@/generator';
+import { PaymentSlipPayload } from '@/store/types';
 
 const generateQR = (slip: PaymentSlipPayload) => {
   return generate2DBarcode({
