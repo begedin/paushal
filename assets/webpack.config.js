@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 const webpack = require('webpack');
 const path = require('path');
 const glob = require('glob');
@@ -5,7 +7,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
-module.exports = (env, options) => ({
+module.exports = (/** env, options */) => ({
   devtool: 'source-map',
   devServer: {
     inline: true,
