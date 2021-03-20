@@ -71,6 +71,6 @@ module.exports = (/** env, options */) => ({
     new CopyWebpackPlugin({
       patterns: [{ from: 'static/', to: '../' }],
     }),
-    new webpack.EnvironmentPlugin(['GOOGLE_CLIENT_ID']),
+    new webpack.EnvironmentPlugin(['GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET']),
   ],
 });
