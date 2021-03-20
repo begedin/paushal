@@ -1,7 +1,7 @@
-import { getLength, isEmpty } from './utils';
-import { validateIntentCode } from './validateIntentCode';
-import { validateReferenceNumber } from './validateReferenceNumber';
-import { PaymentParams } from './types';
+import { getLength, isEmpty } from '@/generator/utils';
+import { validateIntentCode } from '@/generator/validateIntentCode';
+import { validateReferenceNumber } from '@/generator/validateReferenceNumber';
+import { PaymentParams } from '@/generator/types';
 
 const MaxLengths = {
   Price: 16,
@@ -25,7 +25,7 @@ type ValidationError = { key: keyof PaymentParams; message: string };
 export const validatePaymentParams = (
   paymentParams: PaymentParams
 ): [boolean, ValidationError[]] => {
-  let errors: ValidationError[] = [];
+  const errors: ValidationError[] = [];
 
   const fieldLength = getLength(paymentParams.Iznos);
   if (fieldLength > MaxLengths.Price) {

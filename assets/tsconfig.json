@@ -3,6 +3,7 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
+    "jsx": "preserve",
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
@@ -13,13 +14,13 @@
       "dom.iterable",
       "scripthost"
     ],
-    "module": "ESNext",
+    "module": "esnext",
     "moduleResolution": "node",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "../priv/static/",
     "strict": true,
-    "target": "ESNext",
+    "target": "esnext",
     "types": [
       "webpack-env"
     ]

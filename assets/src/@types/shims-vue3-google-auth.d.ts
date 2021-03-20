@@ -1,8 +1,11 @@
-import { Store } from 'vuex';
-import { RootState } from './store';
-import { Credentials } from 'google-auth-library';
+declare module 'vue3-google-auth' {
+  import { Plugin } from 'vue';
+  type CreateParams = {
+    clientId: string;
+    scope: string;
+    prompt: string;
+  };
 
-declare module 'vue/types/vue' {
   interface BasicProfile {
     getEmail: () => string;
     getFamilyName: () => string;
@@ -24,8 +27,8 @@ declare module 'vue/types/vue' {
   }
 
   interface SignInResponse {
-    getBasicProfile: () => BasicProfile;
     getAuthResponse: () => AuthResponse;
+    getBasicProfile: () => BasicProfile;
   }
 
   interface GoogleAuth {
@@ -33,8 +36,12 @@ declare module 'vue/types/vue' {
     signOut: () => Promise<void>;
   }
 
-  interface Vue {
-    store: Store<RootState>;
-    $gAuth: GoogleAuth;
+  interface GAuth {
+    createGAuth: (params: CreateParams) => Plugin;
+    useGAuth: () => GoogleAuth
   }
+
+  const gauth: GAuth;
+
+  export default gauth;
 }

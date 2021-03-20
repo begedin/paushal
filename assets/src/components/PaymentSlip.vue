@@ -1,11 +1,11 @@
 <template>
   <div class="slip">
-    <h1>{{slip.receiver}}</h1>
+    <h1>{{ slip.receiver }}</h1>
     <img :src="dataURL" />
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { defineComponent, PropType } from 'vue';
 
 import { generate2DBarcode } from '@/generator';
 import { PaymentSlipPayload } from '@/store/types';
@@ -27,14 +27,22 @@ const generateQR = (slip: PaymentSlipPayload) => {
   })['canvas']!;
 };
 
-@Component({ name: 'payment-slip' })
-export default class PaymentSlip extends Vue {
-  @Prop({ required: true }) slip!: PaymentSlipPayload;
+const PaymentSlip = defineComponent({
+  name: 'payment-slip',
+  props: {
+    slip: {
+      required: true,
+      type: Object as PropType<PaymentSlipPayload>,
+    },
+  },
+  computed: {
+    dataURL(): string {
+      return generateQR(this.slip).toDataURL();
+    },
+  },
+});
 
-  get dataURL() {
-    return generateQR(this.slip).toDataURL()
-  }
-}
+export default PaymentSlip;
 </script>
 <style lang="scss" scoped>
 .slip {

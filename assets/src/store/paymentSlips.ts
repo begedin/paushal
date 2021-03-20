@@ -1,6 +1,6 @@
 import { ActionTree, MutationTree, Module } from 'vuex';
-import { PaymentSlipPayload } from './types';
-import { RootState } from '.';
+import { PaymentSlipPayload } from '@/store/types';
+import { RootState } from '@/store';
 
 export type PaymentSlipsState = {
   paymentSlips: PaymentSlipPayload[];

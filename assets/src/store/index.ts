@@ -1,6 +1,6 @@
-import Vuex, { Store } from 'vuex';
-import { AuthState, auth } from './auth';
-import { PaymentSlipsState, paymentSlips } from './paymentSlips';
+import { createStore } from 'vuex';
+import { AuthState, auth } from '@/store/auth';
+import { PaymentSlipsState, paymentSlips } from '@/store/paymentSlips';
 
 export type RootState = {
   version?: string;
@@ -8,10 +8,9 @@ export type RootState = {
   paymentSlips: PaymentSlipsState;
 };
 
-export const createStore = (): Store<RootState> =>
-  new Vuex.Store<RootState>({
-    modules: {
-      auth,
-      paymentSlips,
-    },
-  });
+export const store = createStore<RootState>({
+  modules: {
+    auth,
+    paymentSlips,
+  },
+});

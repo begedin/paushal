@@ -1,22 +1,21 @@
 <template>
   <div class="app">
     <div class="nav">
-      <router-link to="/">
-        Home
-      </router-link>
-      <router-link to="/codepoc">
-        POC - Code
-      </router-link>
+      <router-link to="/"> Home </router-link>
+      <router-link to="/codepoc"> POC - Code </router-link>
     </div>
     <router-view />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { defineComponent } from 'vue';
 
-@Component({ name: 'app' })
-export default class App extends Vue {}
+const App = defineComponent({
+  name: ' app',
+});
+
+export default App;
 </script>
 
 <style lang="scss" scoped>

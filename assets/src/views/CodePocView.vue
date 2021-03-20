@@ -5,18 +5,24 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import { State } from 'vuex-class';
-
-import { PaymentSlipPayload } from '@/store/types';
+import { defineComponent } from 'vue';
+import { useStore } from 'vuex';
+import { RootState } from '@/store';
 import PaymentSlip from '@/components/PaymentSlip.vue';
 
-@Component({ name: 'code-poc-view', components: { PaymentSlip } })
-export default class CodePocView extends Vue {
-  @State((state) => state.paymentSlips.paymentSlips)
-  slips!: PaymentSlipPayload[];
-}
+const CodePocView = defineComponent({
+  name: 'code-poc-view',
+  components: { PaymentSlip },
+
+  computed: {
+    slips() {
+      const store = useStore<RootState>();
+      return store.state.paymentSlips.paymentSlips;
+    },
+  },
+});
+
+export default CodePocView;
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
