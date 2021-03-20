@@ -1,7 +1,7 @@
 import PDF417 from 'pdf417-generator';
-import { PaymentParams } from './types';
-import { validatePaymentParams } from './validatePaymentParams';
-import { padLeft } from './utils';
+import { PaymentParams } from '@/generator/types';
+import { validatePaymentParams } from '@/generator/validatePaymentParams';
+import { padLeft } from '@/generator/utils';
 
 const delimiter = String.fromCharCode(0x0a);
 const header = 'HRVHUB30';

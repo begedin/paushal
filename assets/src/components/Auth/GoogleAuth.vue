@@ -8,50 +8,69 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { defineComponent } from 'vue';
+import { useGAuth } from '@/auth/google';
 
-enum ErrorCodes {
-  /** Indicates lack of access to specified scopes */
-  AccessDenied = 'access_denied',
-  /** Indicates siging failed when prompt was set to none */
-  ImmediateFailed = 'immediate_failed',
-  /** Indicates popup to select account was closed by user, without making a selection */
-  PopupClosedByUser = 'popup_closed_by_user',
-}
+// enum ErrorCodes {
+//   /** Indicates lack of access to specified scopes */
+//   AccessDenied = 'access_denied',
+//   /** Indicates siging failed when prompt was set to none */
+//   ImmediateFailed = 'immediate_failed',
+//   /**
+//    * Indicates popup to select account was closed by user,
+//    * without making a selection
+//    */
+//   PopupClosedByUser = 'popup_closed_by_user',
+// }
 
-@Component({ name: 'google-auth' })
-export default class GoogleAuth extends Vue {
-  credentials: {
-    accessToken: string;
-    email: string;
-    image: string;
-    name: string;
-  } | null = null;
+type Credentials = {
+  accessToken: string;
+  email: string;
+  image: string;
+  name: string;
+};
+
+type Data = {
+  credentials: Credentials | null;
+};
+
+const GoogleAuth = defineComponent({
+  name: 'google-auth',
+
+  data() {
+    return {
+      credentials: null,
+    } as Data;
+  },
 
   created() {
     const credentialsStr = localStorage.getItem('credentials-google');
     if (!credentialsStr) return;
 
     this.credentials = JSON.parse(credentialsStr);
-  }
+  },
 
-  async signIn() {
-    const googleUser = await this.$gAuth.signIn();
-    const profile = googleUser.getBasicProfile();
+  methods: {
+    async signIn() {
+      const gAuth = useGAuth();
+      const googleUser = await gAuth.signIn();
+      const profile = googleUser.getBasicProfile();
 
-    const name = profile.getName();
-    const email = profile.getEmail();
-    const image = profile.getImageUrl();
-    const accessToken = googleUser.getAuthResponse().access_token;
+      const name = profile.getName();
+      const email = profile.getEmail();
+      const image = profile.getImageUrl();
+      const accessToken = googleUser.getAuthResponse().access_token;
 
-    this.credentials = { name, email, image, accessToken };
-    localStorage.setItem(
-      'credentials-google',
-      JSON.stringify(this.credentials)
-    );
-  }
-}
+      this.credentials = { name, email, image, accessToken };
+      localStorage.setItem(
+        'credentials-google',
+        JSON.stringify(this.credentials)
+      );
+    },
+  },
+});
+
+export default GoogleAuth;
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

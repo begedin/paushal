@@ -3,12 +3,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { defineComponent } from 'vue';
+
 import GoogleAuth from '@/components/Auth/GoogleAuth.vue';
 
-@Component({ name: 'home-view', components: { GoogleAuth } })
-export default class HomeView extends Vue {}
+const HomeView = defineComponent({
+  name: 'code-poc-view',
+  components: { GoogleAuth },
+});
+
+export default HomeView;
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

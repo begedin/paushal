@@ -1,7 +1,7 @@
 import {
   allowedTwoByteCharacters,
   allowedSingleByteCharacters,
-} from './allowedCharacters';
+} from '@/generator/allowedCharacters';
 
 export const padLeft = (str: string, len: number, pad: string) => {
   while (str.length < len) {

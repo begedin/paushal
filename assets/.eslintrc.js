@@ -11,10 +11,11 @@ module.exports = {
     browser: true,
   },
 
+  // required to lint *.vue files
+  plugins: ['eslint-plugin-vue'],
+  
   extends: ['plugin:vue/essential', '@vue/typescript'],
 
-  // required to lint *.vue files
-  plugins: ['vue'],
 
   // add your custom rules here
   rules: {

@@ -1,35 +1,15 @@
 /// <reference path="main.d.ts" />
-/* globals process */
+import { createApp } from 'vue';
 
-import Vue from 'vue';
-import Vuex from 'vuex';
-import Router from 'vue-router';
+import App from '@/App.vue';
+import { store } from '@/store';
+import { router } from '@/router';
+import { gAuth } from '@/auth/google';
 
-import App from './App.vue';
-import { RootState, createStore } from './store';
-import { router } from './router';
-import { ComponentOptions } from 'vue/types/umd';
-import GAuth from 'vue-google-oauth2';
+const app = createApp(App);
 
-const gauthOption = {
-  clientId: process.env.GOOGLE_CLIENT_ID,
-  scope: 'profile email',
-  prompt: 'select_account',
-};
-Vue.use(GAuth, gauthOption);
+app.use(store);
+app.use(router);
+app.use(gAuth);
 
-Vue.use(Router);
-
-Vue.use<RootState>(Vuex);
-const store = createStore();
-
-const options: ComponentOptions<Vue> = {
-  components: { App },
-  el: '#app',
-  name: 'paushal',
-  router,
-  store,
-  render: (h) => h(App),
-};
-
-export default new Vue(options);
+app.mount('#app');

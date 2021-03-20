@@ -1,5 +1,5 @@
 import { ActionTree, MutationTree, Module } from 'vuex';
-import { RootState } from '.';
+import { RootState } from '@/store';
 
 export type AuthState = {
   authenticated: boolean;

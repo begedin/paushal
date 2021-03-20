@@ -1,4 +1,8 @@
 {
     "vetur.experimental.templateInterpolationService": true,
-    "vetur.format.defaultFormatter.html": "prettier"
+    "vetur.format.defaultFormatter.html": "prettier",
+    "vetur.format.defaultFormatter.ts": "prettier",
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
