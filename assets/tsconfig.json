@@ -22,7 +22,8 @@
     "strict": true,
     "target": "esnext",
     "types": [
-      "webpack-env"
+      "webpack-env",
+      "node"
     ]
   },
   "include": [

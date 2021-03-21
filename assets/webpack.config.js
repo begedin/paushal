@@ -68,9 +68,9 @@ module.exports = (/** env, options */) => ({
   },
   plugins: [
     new VueLoaderPlugin(),
+    new webpack.EnvironmentPlugin(['GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET']),
     new CopyWebpackPlugin({
       patterns: [{ from: 'static/', to: '../' }],
-    }),
-    new webpack.EnvironmentPlugin(['GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET']),
+    })
   ],
 });
