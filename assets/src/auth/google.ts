@@ -4,10 +4,14 @@ import GAuth from 'vue3-google-auth';
 const { createGAuth, useGAuth } = GAuth;
 
 export const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-export const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+
+if (!CLIENT_ID) {
+  throw new Error('Google Client ID not available');
+}
+
 
 export const gAuth = createGAuth({
-  clientId: CLIENT_ID,
+  clientId: CLIENT_ID || '',
   scope: 'profile email',
   prompt: 'select_account',
 });

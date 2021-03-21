@@ -1,14 +1,15 @@
 <template>
-  <div v-if="!!credentials">
-    <img :src="credentials.image" referrerpolicy="no-referrer" />
-    <div>{{ credentials.name }}</div>
-    <div>{{ credentials.email }}</div>
+  <div v-if="!!state.credentials">
+    {{JSON.stringify(state.credentials)}}
+    <img :src="state.credentials.image" referrerpolicy="no-referrer" />
+    <div>{{ state.credentials.name }}</div>
+    <div>{{ state.credentials.email }}</div>
   </div>
   <button v-else class="" @click="signIn">Sign IN</button>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import { useGAuth } from '@/auth/google';
 
 // enum ErrorCodes {
@@ -30,43 +31,38 @@ type Credentials = {
   name: string;
 };
 
-type Data = {
-  credentials: Credentials | null;
-};
-
 const GoogleAuth = defineComponent({
   name: 'google-auth',
 
-  data() {
-    return {
-      credentials: null,
-    } as Data;
-  },
-
-  created() {
+ setup() {
     const credentialsStr = localStorage.getItem('credentials-google');
-    if (!credentialsStr) return;
 
-    this.credentials = JSON.parse(credentialsStr);
-  },
+    const state = reactive({
+      credentials: credentialsStr
+        ? reactive<Credentials>(JSON.parse(credentialsStr))
+        : null,
+    });
 
-  methods: {
-    async signIn() {
-      const gAuth = useGAuth();
+    const gAuth = useGAuth();
+
+    const signIn = async () => {
       const googleUser = await gAuth.signIn();
       const profile = googleUser.getBasicProfile();
 
-      const name = profile.getName();
-      const email = profile.getEmail();
-      const image = profile.getImageUrl();
-      const accessToken = googleUser.getAuthResponse().access_token;
+      state.credentials = {
+        accessToken: googleUser.getAuthResponse().access_token,
+        name: profile.getName(),
+        email: profile.getEmail(),
+        image: profile.getImageUrl(),
+      };
 
-      this.credentials = { name, email, image, accessToken };
       localStorage.setItem(
         'credentials-google',
-        JSON.stringify(this.credentials)
+        JSON.stringify(state.credentials)
       );
-    },
+    };
+
+    return { gAuth, signIn, state };
   },
 });
 
